@@ -1,8 +1,8 @@
-name: Deploy MediCare One demo
+name: Remove hospital demo
 on:
   push:
     branches: [main]
-    paths: ['hospital-demo/**', '.github/workflows/medicare-pages.yml']
+    paths: ['.github/workflows/medicare-pages.yml']
   workflow_dispatch:
 permissions:
   contents: read
@@ -12,17 +12,30 @@ concurrency:
   group: medicare-pages
   cancel-in-progress: false
 jobs:
-  deploy:
+  remove:
+    runs-on: ubuntu-latest
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/configure-pages@v5
+      - name: Unpublish GitHub Pages
+        id: unpublish
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api --method DELETE "repos/$GITHUB_REPOSITORY/pages"
+      - name: Configure removal page if unpublishing is unavailable
+        if: steps.unpublish.outcome == 'failure'
+        uses: actions/configure-pages@v5
+      - name: Remove app from published content
+        if: steps.unpublish.outcome == 'failure'
+        run: |
+          mkdir -p removed
+          echo '<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Project removed</title><p>This project has been removed.</p></html>' > removed/index.html
+          cp removed/index.html removed/404.html
       - uses: actions/upload-pages-artifact@v3
+        if: steps.unpublish.outcome == 'failure'
         with:
-          path: hospital-demo
-      - name: Deploy
-        id: deployment
+          path: removed
+      - name: Publish removal
+        if: steps.unpublish.outcome == 'failure'
         uses: actions/deploy-pages@v4
