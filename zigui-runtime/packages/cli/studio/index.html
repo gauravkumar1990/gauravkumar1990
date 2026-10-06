@@ -1,0 +1,11 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ZigUI Studio</title><link rel="stylesheet" href="/studio.css"></head>
+<body>
+<header><div><b>ZigUI Studio</b><span id="status">Ready</span></div><div class="toolbar"><button data-device="phone">Phone</button><button data-device="tablet">Tablet</button><button data-device="web">Web</button><button id="undo">Undo</button><button id="redo">Redo</button><button id="save">Save</button></div></header>
+<main>
+<aside class="palette"><h3>Components</h3><div id="palette"></div><h3>Tree</h3><div id="tree"></div></aside>
+<section class="workspace"><div id="device" class="device phone"><div id="canvas" class="canvas"></div></div></section>
+<aside class="inspector"><h3>Inspector</h3><div id="inspector"><p>Select an element.</p></div><h3>Generated JavaScript</h3><textarea id="code" spellcheck="false"></textarea><div class="code-actions"><button id="applyCode">Apply code</button><button id="refreshCode">Reload code</button></div></aside>
+</main>
+<script type="module" src="/studio.js"></script>
+</body></html>
