@@ -1,1 +1,10 @@
-{"name":"@zigui/cli","version":"0.2.0-alpha.1","type":"module","bin":{"zui":"./bin/zui.js"},"files":["bin","src","templates"],"dependencies":{"@zigui/ui":"0.2.0-alpha.1"},"engines":{"node":">=20"},"license":"MIT"}
+{
+  "name": "@zigui/cli",
+  "version": "0.3.0-alpha.1",
+  "type": "module",
+  "bin": {"zui": "./bin/zui.js"},
+  "files": ["bin","src","templates","studio"],
+  "dependencies": {"@zigui/ui": "0.3.0-alpha.1"},
+  "engines": {"node": ">=20"},
+  "license": "MIT"
+}
