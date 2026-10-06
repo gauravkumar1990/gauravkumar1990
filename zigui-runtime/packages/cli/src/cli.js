@@ -4,6 +4,7 @@ import path from "node:path";
 import http from "node:http";
 import { spawn } from "node:child_process";
 import { fileURLToPath } from "node:url";
+import { importDesignBuffer, importFigmaUrl, saveImportedAssets } from "./importers.js";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const templateRoot = path.resolve(here, "../templates/basic");
@@ -117,6 +118,23 @@ export async function studio(projectDir, port=5180) {
     }
     if(url.pathname==="/api/source" && req.method==="POST"){
       let body="";for await(const chunk of req)body+=chunk;await fs.writeFile(appFile,body);res.writeHead(200,{"Content-Type":"application/json"});res.end('{"ok":true}');return;
+    }
+    if(url.pathname==="/api/import/file" && req.method==="POST"){
+      let body="";for await(const chunk of req)body+=chunk;
+      try{
+        const payload=JSON.parse(body); const buffer=Buffer.from(payload.base64||"", "base64");
+        const imported=await importDesignBuffer({filename:payload.filename||"design.json",buffer,mime:payload.mime});
+        const source=modelToSource(imported); await fs.writeFile(studioFile,JSON.stringify(imported,null,2)+"\n"); await fs.writeFile(appFile,source); await saveImportedAssets(root,imported);
+        res.writeHead(200,{"Content-Type":"application/json"});res.end(JSON.stringify({ok:true,model:imported,source}));return;
+      }catch(e){res.writeHead(400,{"Content-Type":"application/json"});res.end(JSON.stringify({ok:false,error:e.message}));return;}
+    }
+    if(url.pathname==="/api/import/figma" && req.method==="POST"){
+      let body="";for await(const chunk of req)body+=chunk;
+      try{
+        const payload=JSON.parse(body); const imported=await importFigmaUrl(payload); const source=modelToSource(imported);
+        await fs.writeFile(studioFile,JSON.stringify(imported,null,2)+"\n"); await fs.writeFile(appFile,source); await saveImportedAssets(root,imported);
+        res.writeHead(200,{"Content-Type":"application/json"});res.end(JSON.stringify({ok:true,model:imported,source}));return;
+      }catch(e){res.writeHead(400,{"Content-Type":"application/json"});res.end(JSON.stringify({ok:false,error:e.message}));return;}
     }
     const rel=url.pathname==="/"?"index.html":url.pathname.slice(1);const file=path.resolve(studioRoot,rel);
     if(!file.startsWith(studioRoot)){res.writeHead(403);res.end("Forbidden");return;}
