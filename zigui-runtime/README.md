@@ -24,17 +24,14 @@ npm run dev
 - ✅ hot reload for web
 - ✅ Zig native core/protocol source
 - ✅ Android Gradle/Kotlin native shell and widget factory
-- ✅ ZigUI Studio visual UI builder
-- ✅ realtime phone/tablet/web simulator
-- ✅ drag/drop component tree
-- ✅ click-to-select live inspector
-- ✅ generated JavaScript write-back
 - ✅ unit tests
 - 🚧 QuickJS-NG embedding + JNI renderer bridge
 - 🚧 installable Android APK generated from JS app
 - 🚧 iOS adapter/signing
 
-## ZigUI Studio
+This project deliberately reports incomplete mobile packaging instead of pretending a WebView/demo is a native Android runtime.
+
+## ZigUI Studio — visual UI builder
 
 Run:
 
@@ -42,6 +39,14 @@ Run:
 zui studio .
 ```
 
-Studio provides a realtime device simulator, drag-and-drop components, tree re-parenting, click-to-select element editing, live property inspection, undo/redo, duplicate/delete controls, and generated `src/app.js` beside the canvas.
+Studio opens a local visual editor with realtime phone/tablet/web simulation, drag/drop components, click-to-select editing, property inspection, nesting/reorder, undo/redo, generated JavaScript and source write-back.
 
-The Studio canvas is a fast browser-side device simulator. A true Android emulator/device bridge is the next native-runtime milestone and will use ADB plus the QuickJS/Zig runtime.
+## ZigUI Studio v0.4 — Figma-style visual workflow
+
+The Studio workspace now adds layers/frames, multi-select, alignment/distribution, absolute positioning, row/column auto-layout, device presets, zoom, design tokens, prototype actions, inspect/code panels, drag/drop components and source regeneration.
+
+### Import designs
+
+Use **Import** for `.json`, `.zip`, `.svg`, `.png`, `.jpg`, `.webp`, or `.html`. Use **Figma** for direct Figma URL + token import. The import pipeline recognizes Figma REST JSON, generic design JSON, Stitch-style JSON, ZIP bundles and web bundles. See `docs/IMPORTING.md`.
+
+Direct Figma import preserves layer hierarchy, text/font properties, frame geometry, auto-layout hints, fills/strokes/shadows, components/styles metadata, and variables when the Figma account/API tier permits variable access.
