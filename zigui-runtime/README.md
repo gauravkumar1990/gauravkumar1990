@@ -2,7 +2,7 @@
 
 Experimental cross-platform framework: JavaScript simplicity + Zig native runtime architecture.
 
-## Install
+## Install CLI locally
 ```bash
 npm install
 npm link --workspace @zigui/cli
@@ -19,13 +19,29 @@ npm run dev
 
 ## Current capability
 - ✅ npm-installable monorepo and CLI
-- ✅ reactive JavaScript UI protocol
-- ✅ working web renderer/build/dev server + hot reload
+- ✅ JavaScript reactive UI API
+- ✅ working web renderer/build/dev server
+- ✅ hot reload for web
 - ✅ Zig native core/protocol source
 - ✅ Android Gradle/Kotlin native shell and widget factory
-- ✅ tests
+- ✅ ZigUI Studio visual UI builder
+- ✅ realtime phone/tablet/web simulator
+- ✅ drag/drop component tree
+- ✅ click-to-select live inspector
+- ✅ generated JavaScript write-back
+- ✅ unit tests
 - 🚧 QuickJS-NG embedding + JNI renderer bridge
-- 🚧 native APK generated from JS app
+- 🚧 installable Android APK generated from JS app
 - 🚧 iOS adapter/signing
 
-The mobile build command intentionally fails until the real embedded-JS/JNI bridge exists, rather than returning a WebView/demo and calling it native.
+## ZigUI Studio
+
+Run:
+
+```bash
+zui studio .
+```
+
+Studio provides a realtime device simulator, drag-and-drop components, tree re-parenting, click-to-select element editing, live property inspection, undo/redo, duplicate/delete controls, and generated `src/app.js` beside the canvas.
+
+The Studio canvas is a fast browser-side device simulator. A true Android emulator/device bridge is the next native-runtime milestone and will use ADB plus the QuickJS/Zig runtime.
