@@ -1,0 +1,2 @@
+const std=@import("std");const protocol=@import("protocol.zig");
+pub const Runtime=struct{allocator:std.mem.Allocator,generation:u64=0,pub fn init(a:std.mem.Allocator)Runtime{return .{.allocator=a};}pub fn commitJson(self:*Runtime,json:[]const u8)!void{self.generation+=1;_ = json;}pub fn hotReload(self:*Runtime,module:[]const u8)!void{self.generation+=1;_ = module;}pub fn dispatchEvent(self:*Runtime,event:protocol.NativeEvent)!void{_ = self;_ = event;}};
