@@ -1,1 +1,14 @@
-{"name":"zigui-app","version":"0.1.0","private":true,"type":"module","scripts":{"dev":"zui dev web .","build":"zui build web .","doctor":"zui doctor"},"dependencies":{"@zigui/ui":"0.2.0-alpha.1"},"devDependencies":{"@zigui/cli":"0.2.0-alpha.1"}}
+{
+  "name": "zigui-app",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "zui dev web .",
+    "studio": "zui studio .",
+    "build": "zui build web .",
+    "doctor": "zui doctor"
+  },
+  "dependencies": {"@zigui/ui": "0.3.0-alpha.1"},
+  "devDependencies": {"@zigui/cli": "0.3.0-alpha.1"}
+}
