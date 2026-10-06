@@ -1,13 +1,15 @@
 {
   "name": "zigui-framework",
-  "version": "0.3.0-alpha.1",
+  "version": "0.4.0-alpha.1",
   "private": true,
   "type": "module",
   "workspaces": ["packages/*"],
   "scripts": {
     "test": "node --test packages/ui/test/*.test.js packages/cli/test/*.test.js",
     "check": "node tools/check.mjs",
-    "demo:web": "node packages/cli/bin/zui.js dev web examples/counter"
+    "demo:web": "node packages/cli/bin/zui.js dev web examples/counter",
+    "pack:cli": "npm pack --workspace @zigui/cli",
+    "pack:ui": "npm pack --workspace @zigui/ui"
   },
   "engines": {"node": ">=20"}
 }
