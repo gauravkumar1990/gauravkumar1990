@@ -1,6 +1,13 @@
 {
-  "name":"zigui-framework","version":"0.2.0-alpha.1","private":true,"type":"module",
-  "workspaces":["packages/*"],
-  "scripts":{"test":"node --test packages/ui/test/*.test.js packages/cli/test/*.test.js","demo:web":"node packages/cli/bin/zui.js dev web examples/counter"},
-  "engines":{"node":">=20"}
+  "name": "zigui-framework",
+  "version": "0.3.0-alpha.1",
+  "private": true,
+  "type": "module",
+  "workspaces": ["packages/*"],
+  "scripts": {
+    "test": "node --test packages/ui/test/*.test.js packages/cli/test/*.test.js",
+    "check": "node tools/check.mjs",
+    "demo:web": "node packages/cli/bin/zui.js dev web examples/counter"
+  },
+  "engines": {"node": ">=20"}
 }
